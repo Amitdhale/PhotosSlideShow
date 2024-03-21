@@ -1,24 +1,19 @@
 import React from 'react'
 import Navbar from "./Navbar";
-import data from "../data.json";
 import { useEffect, useState } from "react";
 import left from "../shared/icon-back-button.svg";
 import right from "../shared/icon-next-button.svg";
 import fullscreen from "../shared/icon-view-image.svg";
 import { Link} from "react-router-dom";
-
+import data from '../Content';
 function Details({id}) {
-    const link = "https://amitdhale.github.io/PhotosSlideShow/";
-    const [datachanged,sedatachanged] = useState(true); 
     const [next,setnext] = useState(false)
-    // const [prev,setprev] = useState(false)
     const [element,setelement] = useState(data[0]);
     
   const val = ((id) / data.length) * 100;
   const [load, setload] = useState(false);
   const [showmodal,setshowmodal] = useState(false);
-  const p = (+id-1)%data.length;
-  const n = (+id+1)%data.length;
+  
   useEffect(() => {
     if(id >=0 && id < data.length){
       setload(false);
@@ -27,7 +22,7 @@ function Details({id}) {
         setload(true);
       }, 0);
     }
-  }, []);
+  }, [id]);
   return (
     
     <div className="container">
@@ -38,17 +33,17 @@ function Details({id}) {
       >
       <div className="left">
         <div className="image-container">
-          <img src={link + element.images.hero.large} className="item-image" />
+          <img src={element.images.hero.large} alt="" className="item-image" />
           <button className="fullscreen-btn" onClick={()=>{setshowmodal(true)}}>
             {" "}
-            <img src={fullscreen} /> view image
+            <img src={fullscreen} alt='thumbnail'/> view image
           </button>
           <div className="item-details">
             <h2>{element.name}</h2>
             <p>{element.artist.name}</p>
           </div>
           <div className="artist">
-            <img src={link + element.artist.image} />
+            <img src={element.artist.image} alt='artist' />
           </div>
         </div>
       </div>
@@ -78,14 +73,14 @@ function Details({id}) {
               setelement(data[+id-1]);
               setnext(false);
             },500)
-          }}><img src={left}  /></Link>
+          }}><img src={left}  alt='prev'/></Link>
           <Link to={+id+1 >= data.length ? "/": `/gallery/${(+id+1)}`} onClick={()=>{
             setnext(true)
             setTimeout(()=>{
               setelement(data[+id+1]);
               setnext(false);
             },500)
-          }}><img src={right} /></Link>
+          }}><img src={right} alt='next'/></Link>
         
       </div>
     </div>
@@ -93,7 +88,7 @@ function Details({id}) {
       <div className="modal-container">
       <div className="text" onClick={()=>{setshowmodal(false)}}>Close</div>
       <div>
-          <img src={link + element.images.hero.large} />
+          <img src={element.images.hero.large} alt=''/>
       </div>
       </div>
     </div>

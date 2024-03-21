@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import Pagenotfound from './pages/Pagenotfound';
 
 
-
 function App() {
   return (
   <BrowserRouter>

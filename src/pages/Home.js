@@ -1,18 +1,17 @@
-import logo from "../shared/logo.svg"
 import Navbar from '../components/Navbar';
-import data from '../data.json';
+import data from '../Content';
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-// import image from '../assets/guernica/artist.jpg'
+
 
 
 function Home() {
   const [details,setdetails] = useState(data);
-  const link = "https://amitdhale.github.io/PhotosSlideShow/";
   const [load, setload] = useState(false);
   useEffect(() => {
     setload(false);
     setTimeout(() => {
+      setdetails(data);
       setload(true);
     }, 0);
   }, []);
@@ -27,7 +26,8 @@ function Home() {
             return (
               <Link to={'/gallery/' + index} key={index}>
               <div className='full-container' >
-                  <img src={link + d.images.thumbnail}/>
+                  <img src={d.images.thumbnail} alt=""/>
+
                 <div className='data-container'>
                   <h2>{d?.name}</h2>
                   <p>{d?.artist.name}</p>

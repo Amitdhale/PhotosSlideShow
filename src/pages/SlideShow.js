@@ -3,7 +3,7 @@ import "../Description.css";
 import Pagenotfound from './Pagenotfound';
 import {useParams } from "react-router-dom";
 import Details from "../components/Details";
-import data from "../data.json";
+import data from "../Content";
 
 
 function SlideShow() {
